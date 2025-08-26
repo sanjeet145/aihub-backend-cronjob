@@ -1,0 +1,15 @@
+name: aihub backend Cron Job
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping-render:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Curl request to keep Render alive
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" http://aihub-authentication.onrender.com/api/cronjob/
